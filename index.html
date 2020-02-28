@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>
+    Cuanto falta
+  </title>
+</head>
+
+<body style="text-align:center; font-family: Tahoma; ">
+  <h1 id="GFG_DOWN" style="color:darkblue;"></h1>
+
+  <script>
+    var down = document.getElementById('GFG_DOWN');
+    var today = new Date();
+    var visa = new Date(2020, 2, 13);
+
+    function GFG_Fun() {
+      var dif = (visa - today);
+      var dias = (dif / 1000) / 60 / 60 / 24;
+      var horas = ((dif / 1000) / 60 / 60 / 24 - Math.trunc((dif / 1000) / 60 / 60 / 24)) * 60
+      var min = (horas - Math.trunc(horas)) * 60
+      var sec = (min - Math.trunc(min)) * 60
+      down.innerHTML = "Faltan " + Math.trunc(dias) + " días, " + Math.trunc(horas) + " horas, " + Math.trunc(min) + " minutos y " + Math.trunc(sec) + " segundos";
+    }
+    window.onload = GFG_Fun()
+  </script>
+</body>
+
+</html>
