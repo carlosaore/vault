@@ -1,0 +1,39 @@
+function sudoku(puzzle) {
+  let cache = [];
+  let column = [];
+  let group = [];
+    
+  function getColumn(c) {
+    return [0,1,2,3,4,5,6,7,8].map(v => puzzle[v][c]);
+  }
+  
+  function getGroup(r, c) {
+    if (r < 3) r = 0;
+    if (r > 2 && r < 6) r = 3;
+    if (r > 5) r = 6;
+    
+    if (c < 3) c = 0;
+    if (c > 2 && c < 6) c = 3;
+    if (c > 5) c = 6
+        
+    let arr = [0,1,2].map(u => [0,1,2].map(v => puzzle[r + u][c + v]));
+    return [].concat.apply([], arr);
+  }
+  
+  while (puzzle.toString().includes(0)) {
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        column = getColumn(col);
+        group = getGroup(row, col);
+        for (let num = 1; num < 10; num++) {
+          if (puzzle[row][col] === 0 && !puzzle[row].includes(num) && !column.includes(num) && !group.includes(num)) {
+            cache.push(num);
+          }
+        }
+        if (cache.length === 1) puzzle[row][col] = cache[0];
+        cache = [];
+      }
+    }
+  }
+  return puzzle;
+}
